@@ -26,6 +26,7 @@ COPY conf.py /.default.py
 WORKDIR /data
 VOLUME /data
 VOLUME /root/.jupyter
+VOLUME /v/share/jupyter/lab
 
 EXPOSE 8888
 ENTRYPOINT ["/e"]
