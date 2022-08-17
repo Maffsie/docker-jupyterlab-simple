@@ -1,2 +1,3 @@
-# docker-jupyterlab-simple
-Very simple JupyterLab container
+# jupyter-alpine
+
+Alpine Linux-based container with an extremely basic JupyterLab (and related packages) setup
