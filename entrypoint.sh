@@ -13,4 +13,6 @@ cd $DATADIR
 [ ! -f $JUPYCNF ] && cp $JUPYDEF $JUPYCNF
 [ -f $JUREQFL ] && pip install -Ur $JUREQFL
 
+jupyter lab build
+
 ( $@ )
