@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/Maffsie/docker-jupyterlab-simple/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Maffsie/docker-jupyterlab-simple/actions/workflows/docker-publish.yml)
+
 # docker-jupyter-simple
 
 Very, very simple container for running JupyterLab (+Notebook, +Voila).
@@ -10,7 +12,7 @@ Runs whatever the latest stable Python is, exclusively runs inside a virtualenv,
 	docker volume create jupyter-conf
 	docker run --rm -p 8888:8888 -v jupyter-data:/data -v jupyter-conf:/root/.jupyter maffsie/jupyter-simple:latest
 
-The JupyterLab web interface is exposed on port 8888. No packages are installed by default, but can easily be installed using `pip`.
+The JupyterLab web interface is exposed on port 8888. No packages are installed by default, but can easily be installed using `pip`. On each startup, the entrypoint script checks for the existence of the file `/data/requirements` and runs `pip install -Ur /data/requirements` if present - an easy way to make sure everything you're using is up-to-date is to simply restart the container. This is also how you are expected to install plugins.
 
 ## Volumes
 
