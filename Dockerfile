@@ -7,15 +7,21 @@ RUN apt update && \
 
 RUN . /v/bin/activate && \
 	pip install \
-	--no-cache-dir \
-	-U \
-	jupyterlab \
-	notebook \
-	voila \
-	nodeenv && \
+		--no-cache-dir \
+		-U \
+		jupyterlab \
+		notebook \
+		voila \
+		jupyterlab-git \
+		nodeenv && \
 	nodeenv -p
 
 FROM python:slim as run
+
+RUN apt update && \
+	apt upgrade -y && \
+	apt install -no-install-recommends -y \
+		git
 
 COPY --from=build /v /v
 
