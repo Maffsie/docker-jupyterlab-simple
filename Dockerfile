@@ -20,8 +20,10 @@ FROM python:slim as run
 
 RUN apt update && \
 	apt upgrade -y && \
-	apt install -no-install-recommends -y \
-		git
+	apt install --no-install-recommends -y \
+		git && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /v /v
 
