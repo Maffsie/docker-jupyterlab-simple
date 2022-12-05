@@ -8,6 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  GITEA_REG: commit.pup.cloud
   IMAGE_NAME: jupyter-simple
 
 jobs:
@@ -28,6 +29,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Log into registry ${{ env.GITEA_REG }}
+        uses: docker/login-action@v2.0.0
+        with:
+          username: ${{ secrets.GITEA_USER }}
+          password: ${{ secrets.GITEA_SECRET }}
+          registry: ${{ env.GITEA_REG }}
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v2.0.0
       - name: Build and push Docker image
@@ -35,4 +42,6 @@ jobs:
         uses: docker/build-push-action@v3.1.1
         with:
           push: true
-          tags: maffsie/${{ env.IMAGE_NAME }}:latest 
+          tags: |
+            maffsie/${{ env.IMAGE_NAME }}:latest 
+            ${{ env.GITEA_REG }}/${{ secrets.GITEA_USER }}/${{ env.IMAGE_NAME }}:latest
